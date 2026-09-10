@@ -1,62 +1,94 @@
+/* =========================
+   General
+========================= */
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 body {
+    margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f7fb;
-    color: #1f2937;
+    background: #f3f4f6;
+    color: #111827;
 }
 
 .container {
     width: 90%;
-    max-width: 1100px;
-    margin: 40px auto;
+    max-width: 1200px;
+    margin: auto;
 }
 
+
+/* =========================
+   Header
+========================= */
+
 header {
+    background: #111827;
+    color: white;
+    padding: 25px 0;
     text-align: center;
-    margin-bottom: 30px;
 }
 
 header h1 {
-    font-size: 36px;
-    margin-bottom: 10px;
+    margin: 0;
+    font-size: 30px;
 }
 
 header p {
-    color: #6b7280;
-    font-size: 16px;
+    margin-top: 8px;
+    color: #d1d5db;
 }
 
-.status-card {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
+
+/* =========================
+   Status
+========================= */
+
+.status-indicator {
+    margin: 25px 0 15px;
+    padding: 15px;
     text-align: center;
-    margin-bottom: 25px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.status-card h2 {
-    margin-bottom: 15px;
-}
-
-#status {
-    font-size: 20px;
+    border-radius: 10px;
+    background: white;
     font-weight: bold;
-    margin-bottom: 20px;
+    border: 2px solid #d1d5db;
 }
+
+.status-healthy {
+    background: #dcfce7;
+    color: #166534;
+    border-color: #22c55e;
+}
+
+.status-warning {
+    background: #fef3c7;
+    color: #92400e;
+    border-color: #f59e0b;
+}
+
+.status-critical {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #ef4444;
+}
+
+
+/* =========================
+   Button
+========================= */
 
 button {
-    padding: 12px 25px;
+    display: block;
+    margin: 0 auto 25px;
+    padding: 12px 24px;
     border: none;
     border-radius: 8px;
     background: #2563eb;
     color: white;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -64,11 +96,21 @@ button:hover {
     background: #1d4ed8;
 }
 
+
+/* =========================
+   Dashboard
+========================= */
+
 .dashboard {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
+
+
+/* =========================
+   Cards
+========================= */
 
 .card {
     background: white;
@@ -78,71 +120,28 @@ button:hover {
 }
 
 .card h3 {
+    margin-top: 0;
     margin-bottom: 20px;
-    font-size: 21px;
 }
+
+
+/* =========================
+   Network Information
+========================= */
 
 .card p {
-    margin-bottom: 12px;
-    line-height: 1.5;
+    margin: 12px 0;
 }
 
-.card span {
-    margin-left: 5px;
+.card p strong {
+    display: inline-block;
+    min-width: 100px;
 }
 
-.diagnosis-card {
-    grid-column: span 2;
-}
 
-#problem {
-    font-weight: bold;
-}
-
-#severity {
-    font-weight: bold;
-}
-
-#confidence {
-    font-weight: bold;
-}
-
-@media (max-width: 700px) {
-
-    .dashboard {
-        grid-template-columns: 1fr;
-    }
-
-    .diagnosis-card {
-        grid-column: span 1;
-    }
-
-    header h1 {
-        font-size: 28px;
-    }
-
-    .container {
-        width: 95%;
-    }
-}
-
-.status-indicator {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.status-healthy {
-    color: green;
-}
-
-.status-warning {
-    color: orange;
-}
-
-.status-critical {
-    color: red;
-}
+/* =========================
+   Metrics
+========================= */
 
 .metric {
     display: flex;
@@ -156,38 +155,103 @@ button:hover {
     border-bottom: none;
 }
 
-.metric span {
-    margin-left: 0;
+.metric strong {
+    font-size: 17px;
 }
 
-.metric strong {
-    font-size: 18px;
+
+/* =========================
+   Statistics / Analytics
+========================= */
+
+.statistics-card {
+    grid-column: 1 / -1;
+}
+
+.statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.stat-box {
+    padding: 18px;
+    background: #f9fafb;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+
+.stat-box span {
+    display: block;
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 8px;
+}
+
+.stat-box strong {
+    display: block;
+    font-size: 24px;
+}
+
+.common-problem {
+    margin-top: 15px;
+    padding: 18px;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.common-problem span {
+    display: block;
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.common-problem strong {
+    font-size: 16px;
+}
+
+
+/* =========================
+   Diagnosis
+========================= */
+
+.diagnosis-card {
+    grid-column: 1 / -1;
 }
 
 .diagnosis-main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
+    gap: 20px;
 }
 
 .label {
     display: block;
-    font-size: 14px;
+    font-size: 13px;
     color: #6b7280;
     margin-bottom: 6px;
+    font-weight: bold;
 }
 
 .problem-text {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
 }
+
+
+/* =========================
+   Severity
+========================= */
 
 .severity-badge {
     padding: 8px 16px;
     border-radius: 20px;
+    font-size: 13px;
     font-weight: bold;
-    font-size: 14px;
 }
 
 .severity-low {
@@ -205,8 +269,13 @@ button:hover {
     color: #991b1b;
 }
 
+
+/* =========================
+   Confidence
+========================= */
+
 .confidence-section {
-    margin-bottom: 25px;
+    margin-top: 25px;
 }
 
 .confidence-header {
@@ -217,7 +286,7 @@ button:hover {
 
 .confidence-bar {
     width: 100%;
-    height: 10px;
+    height: 12px;
     background: #e5e7eb;
     border-radius: 10px;
     overflow: hidden;
@@ -231,15 +300,25 @@ button:hover {
     background: #2563eb;
 }
 
+
+/* =========================
+   Explanation / Recommendation
+========================= */
+
 .diagnosis-section {
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #e5e7eb;
+    margin-top: 22px;
 }
 
 .diagnosis-section p {
+    margin: 0;
     line-height: 1.6;
+    color: #374151;
 }
+
+
+/* =========================
+   Network Topology
+========================= */
 
 .topology-card {
     background: white;
@@ -250,6 +329,7 @@ button:hover {
 }
 
 .topology-card h2 {
+    margin-top: 0;
     margin-bottom: 30px;
 }
 
@@ -287,14 +367,6 @@ button:hover {
     color: #6b7280;
 }
 
-.connection {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: #6b7280;
-}
-
 .node-healthy {
     border-color: green;
     background: #f0fdf4;
@@ -310,18 +382,12 @@ button:hover {
     background: #fef2f2;
 }
 
-@media (max-width: 700px) {
-    .topology {
-        flex-direction: column;
-    }
-
-    .connection {
-        transform: rotate(90deg);
-    }
-
-    .network-node {
-        width: 220px;
-    }
+.connection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #6b7280;
 }
 
 .connection-warning {
@@ -343,6 +409,11 @@ button:hover {
     margin-top: 5px;
 }
 
+
+/* =========================
+   History
+========================= */
+
 .history-card {
     background: white;
     padding: 25px;
@@ -352,6 +423,7 @@ button:hover {
 }
 
 .history-card h2 {
+    margin-top: 0;
     margin-bottom: 20px;
 }
 
@@ -386,6 +458,11 @@ button:hover {
     background: #f9fafb;
 }
 
+
+/* =========================
+   History Severity
+========================= */
+
 .history-severity {
     display: inline-block;
     padding: 5px 10px;
@@ -407,4 +484,45 @@ button:hover {
 .history-high {
     background: #fee2e2;
     color: #991b1b;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 800px) {
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .statistics-card,
+    .diagnosis-card {
+        grid-column: auto;
+    }
+
+    .statistics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .topology {
+        flex-direction: column;
+    }
+
+    .connection {
+        transform: rotate(90deg);
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .statistics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: 95%;
+    }
 }
