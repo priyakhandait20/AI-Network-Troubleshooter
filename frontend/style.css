@@ -1,0 +1,410 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.status-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.status-card h2 {
+    margin-bottom: 15px;
+}
+
+#status {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card h3 {
+    margin-bottom: 20px;
+    font-size: 21px;
+}
+
+.card p {
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.card span {
+    margin-left: 5px;
+}
+
+.diagnosis-card {
+    grid-column: span 2;
+}
+
+#problem {
+    font-weight: bold;
+}
+
+#severity {
+    font-weight: bold;
+}
+
+#confidence {
+    font-weight: bold;
+}
+
+@media (max-width: 700px) {
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .diagnosis-card {
+        grid-column: span 1;
+    }
+
+    header h1 {
+        font-size: 28px;
+    }
+
+    .container {
+        width: 95%;
+    }
+}
+
+.status-indicator {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.status-healthy {
+    color: green;
+}
+
+.status-warning {
+    color: orange;
+}
+
+.status-critical {
+    color: red;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.metric:last-child {
+    border-bottom: none;
+}
+
+.metric span {
+    margin-left: 0;
+}
+
+.metric strong {
+    font-size: 18px;
+}
+
+.diagnosis-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.label {
+    display: block;
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 6px;
+}
+
+.problem-text {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.severity-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.severity-low {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.severity-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.severity-high {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.confidence-section {
+    margin-bottom: 25px;
+}
+
+.confidence-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.confidence-bar {
+    width: 100%;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#confidence-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    background: #2563eb;
+}
+
+.diagnosis-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.diagnosis-section p {
+    line-height: 1.6;
+}
+
+.topology-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+}
+
+.topology-card h2 {
+    margin-bottom: 30px;
+}
+
+.topology {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px 0;
+}
+
+.network-node {
+    width: 180px;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid #d1d5db;
+    border-radius: 12px;
+    background: #f9fafb;
+    transition: 0.3s;
+}
+
+.node-icon {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.node-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.node-status {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.connection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #6b7280;
+}
+
+.node-healthy {
+    border-color: green;
+    background: #f0fdf4;
+}
+
+.node-warning {
+    border-color: orange;
+    background: #fffbeb;
+}
+
+.node-critical {
+    border-color: red;
+    background: #fef2f2;
+}
+
+@media (max-width: 700px) {
+    .topology {
+        flex-direction: column;
+    }
+
+    .connection {
+        transform: rotate(90deg);
+    }
+
+    .network-node {
+        width: 220px;
+    }
+}
+
+.connection-warning {
+    color: orange;
+}
+
+.connection-critical {
+    color: red;
+}
+
+.connection-healthy {
+    color: green;
+}
+
+.connection small {
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.history-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
+}
+
+.history-card h2 {
+    margin-bottom: 20px;
+}
+
+.history-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+#history-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+#history-table th,
+#history-table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#history-table th {
+    background: #f9fafb;
+    font-size: 14px;
+}
+
+#history-table td {
+    font-size: 14px;
+}
+
+#history-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+.history-severity {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.history-low {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.history-medium {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.history-high {
+    background: #fee2e2;
+    color: #991b1b;
+}

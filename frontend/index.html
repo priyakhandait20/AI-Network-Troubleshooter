@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Network Troubleshooter</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>AI Network Troubleshooter</h1>
+            <p>Diagnose your network and identify possible problems.</p>
+        </header>
+
+        <section class="status-card">
+
+            <h2>Network Status</h2>
+
+            <div id="status" class="status-indicator">
+            🟢 Ready to diagnose
+            </div>
+
+            <button onclick="runDiagnosis()">
+                Run Network Diagnosis
+            </button>
+
+        </section>
+
+
+        <section class="dashboard">
+
+            <div class="card">
+                <h3>Network Information</h3>
+
+                <p>
+                    <strong>Local IP:</strong>
+                    <span id="local-ip">-</span>
+                </p>
+
+                <p>
+                    <strong>Gateway:</strong>
+                    <span id="gateway">-</span>
+                </p>
+
+                <p>
+                    <strong>Interface:</strong>
+                    <span id="interface">-</span>
+                </p>
+
+                <div class="metric">
+                    <span>📶 Wi-Fi Signal</span>
+                    <strong id="wifi-signal">-</strong>
+                </div>
+
+            </div>
+
+
+            <div class="card">
+                <h3>Internet Diagnostics</h3>
+
+                <div class="metric">
+                    <span>📡 Latency</span>
+                    <strong id="latency">-</strong>
+                </div>
+
+                <div class="metric">
+                    <span>📦 Packet Loss</span>
+                    <strong id="packet-loss">-</strong>
+                </div>
+
+                <div class="metric">
+                    <span>🌐 Internet</span>
+                    <strong id="internet">-</strong>
+                </div>
+
+                <div class="metric">
+                    <span>🔎 DNS</span>
+                    <strong id="dns">-</strong>
+                </div>
+            </div>
+
+
+            <div class="card diagnosis-card">
+
+                <h3>🧠 AI Diagnosis</h3>
+
+                <div class="diagnosis-main">
+                    <div>
+                        <span class="label">Problem</span>
+                        <div id="problem" class="problem-text">-</div>
+                    </div>
+
+                    <div id="severity" class="severity-badge">
+                        -
+                    </div>
+                </div>
+
+                <div class="confidence-section">
+                    <div class="confidence-header">
+                        <span>Confidence</span>
+                        <strong id="confidence">-</strong>
+                    </div>
+
+                    <div class="confidence-bar">
+                        <div id="confidence-fill"></div>
+                    </div>
+                </div>
+
+                <div class="diagnosis-section">
+                    <span class="label">🧠 Explanation</span>
+                    <p id="explanation">-</p>
+                </div>
+
+                <div class="diagnosis-section">
+                    <span class="label">🛠️ Recommendation</span>
+                    <p id="recommendation">-</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="topology-card">
+
+            <h2>🌐 Network Topology</h2>
+
+            <div class="topology">
+
+                <div class="network-node" id="pc-node">
+                    <div class="node-icon">💻</div>
+                    <div class="node-title">Your PC</div>
+                    <div class="node-status" id="pc-status">Ready</div>
+                </div>
+
+                <div class="connection" id="pc-router-connection">
+                    <span>➜</span>
+                </div>
+
+                <div class="network-node" id="router-node">
+                    <div class="node-icon">📡</div>
+                    <div class="node-title">Router</div>
+                    <div class="node-status" id="router-status">Ready</div>
+                </div>
+
+                <div class="connection" id="router-internet-connection">
+                    <span>➜</span>
+                    <small id="connection-status"></small>
+                </div>
+
+                <div class="network-node" id="internet-node">
+                    <div class="node-icon">🌐</div>
+                    <div class="node-title">Internet</div>
+                    <div class="node-status" id="internet-status">Ready</div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="history-card">
+
+            <h2>📊 Diagnostic History</h2>
+
+            <div class="history-table-container">
+
+                <table id="history-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Time</th>
+                            <th>Diagnosis</th>
+                            <th>Severity</th>
+                            <th>Confidence</th>
+                            <th>Latency</th>
+                            <th>Packet Loss</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="history-body">
+                        <tr>
+                            <td colspan="7">No history available</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
