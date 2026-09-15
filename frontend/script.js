@@ -68,11 +68,13 @@ async function runDiagnosis() {
            Diagnosis
         ========================= */
 
-        document.getElementById("problem").textContent =
-            data.diagnosis.problem;
+        const primaryDiagnosis = data.diagnosis.primary;
 
-        const severity = data.diagnosis.severity;
-        const confidence = data.diagnosis.confidence;
+        document.getElementById("problem").textContent =
+            primaryDiagnosis.problem;
+
+        const severity = primaryDiagnosis.severity;
+        const confidence = primaryDiagnosis.confidence;
 
         const severityElement =
             document.getElementById("severity");
@@ -117,13 +119,13 @@ async function runDiagnosis() {
         /* Explanation */
 
         document.getElementById("explanation").textContent =
-            data.diagnosis.explanation;
+            primaryDiagnosis.explanation;
 
 
         /* Recommendation */
 
         document.getElementById("recommendation").textContent =
-            data.diagnosis.recommendation;
+            primaryDiagnosis.recommendation;
 
 
         /* =========================

@@ -249,11 +249,13 @@ def create_diagnostic_report(
         },
 
         "diagnosis": {
-            "problem": diagnosis["problem"],
-            "severity": diagnosis["severity"],
-            "confidence": diagnosis["confidence"],
-            "explanation": diagnosis["explanation"],
-            "recommendation": diagnosis["recommendation"]
+            "problem": diagnosis["primary"]["problem"],
+            "severity": diagnosis["primary"]["severity"],
+            "confidence": diagnosis["primary"]["confidence"],
+            "explanation": diagnosis["primary"]["explanation"],
+            "recommendation": diagnosis["primary"]["recommendation"],
+            "issues": diagnosis["issues"],
+            "issue_count": diagnosis["issue_count"]
         }
     }
 
@@ -323,11 +325,24 @@ if __name__ == "__main__":
     print("         DIAGNOSIS")
     print("================================")
 
-    print(f"Problem        : {diagnosis['problem']}")
-    print(f"Severity       : {diagnosis['severity']}")
-    print(f"Confidence     : {diagnosis['confidence']}%")
-    print(f"Explanation    : {diagnosis['explanation']}")
-    print(f"Recommendation : {diagnosis['recommendation']}")
+    primary = diagnosis["primary"]
+
+    print(f"Problem        : {primary['problem']}")
+    print(f"Severity       : {primary['severity']}")
+    print(f"Confidence     : {primary['confidence']}%")
+    print(f"Explanation    : {primary['explanation']}")
+    print(f"Recommendation : {primary['recommendation']}")
+
+    print(f"\nTotal Issues   : {diagnosis['issue_count']}")
+
+    print("\nDetected Issues:")
+
+    for index, issue in enumerate(diagnosis["issues"], start=1):
+        print(f"\n{index}. {issue['problem']}")
+        print(f"   Severity    : {issue['severity']}")
+        print(f"   Confidence  : {issue['confidence']}%")
+        print(f"   Explanation : {issue['explanation']}")
+        print(f"   Action      : {issue['recommendation']}")
 
     print("\n================================")
 
