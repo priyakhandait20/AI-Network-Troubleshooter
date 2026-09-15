@@ -68,7 +68,7 @@ async function runDiagnosis() {
            Diagnosis
         ========================= */
 
-        const primaryDiagnosis = data.diagnosis.primary;
+        const primaryDiagnosis = data.diagnosis;
 
         document.getElementById("problem").textContent =
             primaryDiagnosis.problem;
@@ -127,6 +127,30 @@ async function runDiagnosis() {
         document.getElementById("recommendation").textContent =
             primaryDiagnosis.recommendation;
 
+        /* =========================
+        Detected Issues
+        ========================= */
+
+        const issuesList = document.getElementById("issues-list");
+
+        issuesList.innerHTML = "";
+
+        data.diagnosis.issues.forEach((issue, index) => {
+            const issueElement = document.createElement("div");
+
+            issueElement.className =
+                "issue-item issue-" + issue.severity.toLowerCase();
+
+            issueElement.innerHTML = `
+                <h4>${index + 1}. ${issue.problem}</h4>
+                <p><strong>Severity:</strong> ${issue.severity}</p>
+                <p><strong>Confidence:</strong> ${issue.confidence}%</p>
+                <p><strong>Explanation:</strong> ${issue.explanation}</p>
+                <p><strong>Action:</strong> ${issue.recommendation}</p>
+            `;
+
+            issuesList.appendChild(issueElement);
+        });
 
         /* =========================
            Overall Status
