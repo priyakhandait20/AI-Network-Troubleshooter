@@ -1,3 +1,7 @@
+let latencyChart = null;
+let packetLossChart = null;
+let diagnosisChart = null;
+
 /* =========================
    Run Network Diagnosis
 ========================= */
@@ -302,6 +306,12 @@ async function runDiagnosis() {
 
         await loadStatistics();
 
+        /* =========================
+           Refresh Charts
+        ========================= */
+
+        await loadCharts();
+
 
     } catch (error) {
 
@@ -374,6 +384,220 @@ async function loadStatistics() {
         );
     }
 }
+
+
+/* =========================
+   Load Analytics Charts
+========================= */
+
+async function loadCharts() {
+
+    try {
+
+        const response = await fetch("/history");
+
+        if (!response.ok) {
+            throw new Error("Failed to load chart data");
+        }
+
+        const data = await response.json();
+
+        const history = [...data.history].reverse();
+
+        const labels = history.map(record => {
+            return "#" + record.id;
+        });
+
+        const latencyData = history.map(record => {
+            return record.latency;
+        });
+
+        const packetLossData = history.map(record => {
+            return record.packet_loss;
+        });
+
+
+        /* =========================
+           Latency Chart
+        ========================= */
+
+        const latencyContext =
+            document.getElementById("latency-chart");
+
+        if (latencyChart) {
+            latencyChart.destroy();
+        }
+
+        latencyChart = new Chart(latencyContext, {
+
+            type: "line",
+
+            data: {
+                labels: labels,
+
+                datasets: [{
+                    label: "Latency (ms)",
+                    data: latencyData,
+
+                    borderWidth: 2,
+
+                    tension: 0.3,
+
+                    spanGaps: true
+                }]
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                scales: {
+                    y: {
+                        beginAtZero: true,
+
+                        title: {
+                            display: true,
+                            text: "Milliseconds"
+                        }
+                    },
+
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Diagnostic Run"
+                        }
+                    }
+                }
+            }
+        });
+
+
+        /* =========================
+           Packet Loss Chart
+        ========================= */
+
+        const packetLossContext =
+            document.getElementById("packet-loss-chart");
+
+        if (packetLossChart) {
+            packetLossChart.destroy();
+        }
+
+        packetLossChart = new Chart(
+            packetLossContext,
+            {
+
+                type: "line",
+
+                data: {
+                    labels: labels,
+
+                    datasets: [{
+                        label: "Packet Loss (%)",
+                        data: packetLossData,
+
+                        borderWidth: 2,
+
+                        tension: 0.3,
+
+                        spanGaps: true
+                    }]
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+
+                            title: {
+                                display: true,
+                                text: "Packet Loss (%)"
+                            }
+                        },
+
+                        x: {
+                            title: {
+                                display: true,
+                                text: "Diagnostic Run"
+                            }
+                        }
+                    }
+                }
+            }
+        );
+
+        // Diagnosis distribution
+        const diagnosisCounts = {};
+
+        history.forEach(record => {
+            const diagnosis = record.diagnosis;
+
+            if (diagnosisCounts[diagnosis]) {
+                diagnosisCounts[diagnosis]++;
+            } else {
+                diagnosisCounts[diagnosis] = 1;
+            }
+        });
+
+        const diagnosisLabels = Object.keys(diagnosisCounts);
+        const diagnosisValues = Object.values(diagnosisCounts);
+
+        const diagnosisContext = document.getElementById("diagnosis-chart");
+
+        if (diagnosisChart) {
+            diagnosisChart.destroy();
+        }
+
+        diagnosisChart = new Chart(diagnosisContext, {
+            type: "bar",
+            data: {
+                labels: diagnosisLabels,
+                datasets: [{
+                    label: "Occurrences",
+                    data: diagnosisValues,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        },
+                        title: {
+                            display: true,
+                            text: "Number of Runs"
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Diagnosis"
+                        }
+                    }
+                }
+            }
+        });
+
+    } catch (error) {
+
+        console.error(
+            "Chart error:",
+            error
+        );
+    }
+}
+
 
 
 /* =========================
@@ -498,3 +722,4 @@ async function loadHistory() {
 
 loadHistory();
 loadStatistics();
+loadCharts();
